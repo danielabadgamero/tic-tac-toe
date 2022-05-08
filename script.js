@@ -100,10 +100,12 @@ function showWinner() {
             winnerBoard.querySelector("span#winner").textContent = winner;
         }
     } else {
-        if (winner === player1Name) {
+        if (winner === "player1") {
             winnerBoard.querySelector("span#winner").textContent = player1Name;
-        } else {
+        } else if (winner === "player2") {
             winnerBoard.querySelector("span#winner").textContent = player2Name;
+        } else {
+            winnerBoard.querySelector("span#winner").textContent = winner;
         }
     }
     document.querySelector("div.empty").classList.add("prompt-ask");
@@ -170,9 +172,11 @@ cells.forEach(cell => {
             } else {
                 if (document.getElementById("player1-turn").classList.contains("turn")) {
                     e.target.textContent = "X"
+                    occupiedCells.push(parseInt(e.target.id));
                     nextTurn();
                 } else {
                     e.target.textContent = "O"
+                    occupiedCells.push(parseInt(e.target.id));
                     nextTurn();
                 }
             }
