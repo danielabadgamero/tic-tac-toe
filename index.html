@@ -11,7 +11,7 @@
 <body>
     <header>
         <h1>Tic Tac Toe</h1>
-        <p class="turn">Turn: <span id="players-turn">You</span> / <span id="opponents-turn">Opponent</span></p>
+        <p>Turn: <span id="player1-turn"></span> / <span id="player2-turn"></span></p>
     </header>
     <div class="board">
     </div>
@@ -33,6 +33,9 @@
             </div>
             <button type="button">Play!</button>
         </form>
+    </div>
+    <div class="empty" id="winner-board">
+        <div class="rounds">The winner is: <span id="winner"></span></div>
     </div>
 </body>
 </html>

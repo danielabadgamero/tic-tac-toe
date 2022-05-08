@@ -64,14 +64,19 @@ p {
     justify-content: center;
     width: 100%;
     height: 100%;
-    grid-template-columns: repeat(3, 10vw);
-    grid-template-rows: repeat(3, 10vw);
+    grid-template-columns: repeat(3, minmax(10vw, 100px));
+    grid-template-rows: repeat(3, minmax(10vw, 100px));
 }
 
 .cell {
     height: 100%;
     width: 100%;
     border: 2px solid black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5em;
 }
 
 .rounds {
@@ -118,4 +123,18 @@ button:hover {
     gap: 5px;
     justify-content: center;
     align-items: center;
+}
+
+.turn {
+    color: green;
+}
+
+span {
+    color: red;
+}
+
+.winner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
