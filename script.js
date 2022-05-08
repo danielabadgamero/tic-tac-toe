@@ -79,18 +79,35 @@ function checkWinner() {
     } else if (cells[0].textContent === "O" && cells[4].textContent === "O" && cells[8].textContent === "O") {
         return "player2";
     }
-    if (cells[2].textContent === "X" && cells[4].textContent === "X" && cells[7].textContent === "X") { // checks for top-right to bottom-left diagonal
+    if (cells[2].textContent === "X" && cells[4].textContent === "X" && cells[6].textContent === "X") { // checks for top-right to bottom-left diagonal
         return "player1";
-    } else if (cells[2].textContent === "O" && cells[4].textContent === "O" && cells[7].textContent === "O") {
+    } else if (cells[2].textContent === "O" && cells[4].textContent === "O" && cells[6].textContent === "O") {
         return "player2";
+    }
+    if (occupiedCells[8] >= 0) {
+        return "Ties!";
     }
 }
 
 function showWinner() {
     winnerBoard.classList.add("winner");
     if (mode === "computer") {
-        winnerBoard.querySelector("span#winner").textContent = winner;
+        if (winner === "player1") {
+            winnerBoard.querySelector("span#winner").textContent = "Player1";
+        } else if (winner === "player2") {
+            winnerBoard.querySelector("span#winner").textContent = "Computer";
+        } else {
+            winnerBoard.querySelector("span#winner").textContent = winner;
+        }
+    } else {
+        if (winner === player1Name) {
+            winnerBoard.querySelector("span#winner").textContent = player1Name;
+        } else {
+            winnerBoard.querySelector("span#winner").textContent = player2Name;
+        }
     }
+    document.querySelector("div.empty").classList.add("prompt-ask");
+
 }
 
 for (let i = 0; i <= 8; i++) {
@@ -109,6 +126,15 @@ playAgainstCheckboxes[1].addEventListener("change", (e) => {
 })
 
 startButton.addEventListener("click", () => {
+    occupiedCells = [];
+    cells.forEach(cell => {
+        cell.textContent = "";
+    })
+    winnerBoard.classList.remove("winner");
+    document.querySelector("#player1-turn").classList.remove("turn");
+    document.querySelector("#player2-turn").classList.remove("turn");
+    document.querySelector("#player1-turn").textContent = "";
+    document.querySelector("#player2-turn").textContent = "";
     if (!playAgainstCheckboxes[0].checked && !playAgainstCheckboxes[1].checked) {
         alert("No opponent selected");
     } else if (playAgainstCheckboxes[1].checked) {
@@ -139,6 +165,7 @@ cells.forEach(cell => {
                     computerMove(occupiedCells);
                 } else {
                     computerMove(occupiedCells);
+                    nextTurn();
                 }
             } else {
                 if (document.getElementById("player1-turn").classList.contains("turn")) {
